@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <center>
+            <h1 class="btn btn-lg btn-primary">Citizen Login</h1>
+            <hr>
+            <form action="{% url 'citizen_login' %}" method="POST">
+                {% csrf_token %}
+                <Table>
+                    <tr>
+                        <td><label for="cuser">Username</label></td>
+                        <td><input type="text" name="username" id="cuser" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><label for="cpwd">Password</label></td>
+                        <td><input type="password" name="userpwd" id="cpwd" value=""></td>
+                    </tr>
+                </Table><br>
+                <button type="submit" class="btn btn-success">Sign In</button><br><br>
+                <a href="{% url 'registration' %}"><button type="button" class="btn btn-info">If not register yet? Register Here</button></a>
+                <a href="{% url 'forgot_password' %}"><button type="button" class="btn btn-danger">Forgotten Password</button></a>
+            </form>
+        </center>
+    </div>
+
+{% endblock %}
