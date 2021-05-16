@@ -132,7 +132,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'django.ad2021@gmail.com'
-EMAIL_HOST_PASSWORD = 'Django2021'
+EMAIL_HOST_PASSWORD = 'django2021admin'
 
 EMAIL_USE_TLS = True
 
