@@ -185,7 +185,7 @@ def view_citizen(request):
         user_details = models.Citizenprofile.objects.get(user = user)
         return render(request,'citizen/view_citizen.html',{"user_details":user_details})
     except:
-        return HttpResponse("<h1>Invalid User...</h1>")
+        return HttpResponse("<h1>Kindly Update your profile....</h1>")
 
 class DateInput(forms.DateInput):
     input_type = 'date'
