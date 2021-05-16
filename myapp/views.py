@@ -75,24 +75,26 @@ def citizen_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def citizen_profile(request):
+    try:
+        if request.method == 'POST':
+            form = forms.CitizenprofileModelForm(request.POST, request.FILES)
+            if form.is_valid():
+                form_obj = form.save(commit=False)
+                usr = request.session['username']
+                user = models.User.objects.get(username=usr)
+                form_obj.user = user
 
-    if request.method == 'POST':
-        form = forms.CitizenprofileModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form_obj = form.save(commit=False)
-            usr = request.session['username']
-            user = models.User.objects.get(username=usr)
-            form_obj.user = user
+                if 'profile_pic' in request.FILES:
+                    form_obj.profile_pic = request.FILES['profile_pic']
 
-            if 'profile_pic' in request.FILES:
-                form_obj.profile_pic = request.FILES['profile_pic']
+                form_obj.save()
 
-            form_obj.save()
-
-            return HttpResponseRedirect(reverse('view_citizen')) 
-        else:
-            print(form.errors)
-            return HttpResponse("Invalid form")
+                return HttpResponseRedirect(reverse('view_citizen')) 
+            else:
+                print(form.errors)
+                return HttpResponse("Invalid form")
+    except:
+        return HttpResponse(f"<h1>Profile already save kindly visite view profile to update you profile</h1>")
     else:
         form = forms.CitizenprofileModelForm()
         return render(request, 'citizen/citizen_profile.html', {'form': form})
