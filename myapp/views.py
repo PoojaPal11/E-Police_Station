@@ -89,7 +89,7 @@ def citizen_profile(request):
 
             form_obj.save()
 
-            return HttpResponse('Profile saved') 
+            return HttpResponseRedirect(reverse('view_citizen')) 
         else:
             print(form.errors)
             return HttpResponse("Invalid form")
