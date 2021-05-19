@@ -706,30 +706,45 @@ def service_officers(request):
 def view_fir(request):
     usr = request.session["username"]
     user = models.Inspector_login.objects.get(username=usr)
-    username = models.Inspector.objects.get(user = user)
-    view_fir = models.Fir.objects.filter(police_station=username.police_station).all()
-    return render(request, 'inspector/view_fir.html',{"view_fir":view_fir})
+    try:
+        username = models.Inspector.objects.get(user = user)
+        view_fir = models.Fir.objects.filter(police_station=username.police_station).all()
+        return render(request, 'inspector/view_fir.html',{"view_fir":view_fir})
+    except:
+        return HttpResponse("<h1>Go to add profile and update your profile.</h1>")
 
 def view_complain(request):
     usr = request.session["username"]
     user = models.Inspector_login.objects.get(username=usr)
-    username = models.Inspector.objects.get(user = user)
-    view_complain = models.Complain.objects.filter(police_station=username.police_station).all()
-    return render(request, 'inspector/view_complain.html',{"view_complain":view_complain})
+    try:
+        username = models.Inspector.objects.get(user = user)
+        view_complain = models.Complain.objects.filter(police_station=username.police_station).all()
+        return render(request, 'inspector/view_complain.html',{"view_complain":view_complain})
+    except:
+        return HttpResponse("<h1>Go to add profile and update your profile.</h1>")
+
 
 def manage_fir(request):
     usr = request.session["username"]
     user = models.Inspector_login.objects.get(username=usr)
-    username = models.Inspector.objects.get(user = user)
-    manage_fir = models.Fir.objects.filter(police_station=username.police_station).all()
-    return render(request, 'inspector/manage_fir.html',{"manage_fir":manage_fir})
+    try:
+        username = models.Inspector.objects.get(user = user)
+        manage_fir = models.Fir.objects.filter(police_station=username.police_station).all()
+        return render(request, 'inspector/manage_fir.html',{"manage_fir":manage_fir})
+    except:
+        return HttpResponse("<h1>Go to add profile and update your profile.</h1>")
+
 
 def manage_complain(request):
     usr = request.session["username"]
     user = models.Inspector_login.objects.get(username=usr)
-    username = models.Inspector.objects.get(user = user)
-    manage_complain = models.Complain.objects.filter(police_station=username.police_station).all()
-    return render(request, 'inspector/manage_complain.html',{"manage_complain":manage_complain})
+    try:
+        username = models.Inspector.objects.get(user = user)
+        manage_complain = models.Complain.objects.filter(police_station=username.police_station).all()
+        return render(request, 'inspector/manage_complain.html',{"manage_complain":manage_complain})
+    except:
+       return HttpResponse("<h1>Go to add profile and update your profile.</h1>")
+
 
 class FirUpdateView(UpdateView):
     model = models.Fir
