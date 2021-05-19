@@ -759,11 +759,14 @@ class ComplainUpdateView(UpdateView):
 def user_details(request):
     usr = request.session["username"]
     user = models.Inspector_login.objects.get(username=usr)
-    username = models.Inspector.objects.get(user = user)
-    complain_details = models.Complain.objects.filter(police_station=username.police_station).all()
-    c_usr = models.Citizenprofile.objects.all()
-    fir_details = models.Fir.objects.filter(police_station=username.police_station).all()
-    return render(request , "inspector/user_details.html",{"complain_details":complain_details,"fir_details":fir_details,"c_usr":c_usr})
+    try:
+        username = models.Inspector.objects.get(user = user)
+        complain_details = models.Complain.objects.filter(police_station=username.police_station).all()
+        c_usr = models.Citizenprofile.objects.all()
+        fir_details = models.Fir.objects.filter(police_station=username.police_station).all()
+        return render(request , "inspector/user_details.html",{"complain_details":complain_details,"fir_details":fir_details,"c_usr":c_usr})
+    except:
+        return HttpResponse("<h1>Go to add profile and update your profile.</h1>")
 
 
 #--------------------------------------------VISITOR_VIEW-----------------------------------------------------------#
